@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import Header from './components/Header';
+import Auth from './components/Auth';
 import JournalInput from './components/JournalInput';
 import Spinner from './components/Spinner';
 import SpreadSelection from './components/SpreadSelection';
@@ -16,11 +17,16 @@ import InspirationSpreads from './components/InspirationSpreads';
 import LiveConversation from './components/LiveConversation';
 import SpreadLibrary from './components/SpreadLibrary';
 import { getSpreadSuggestions, generateTarotReading, getFollowUpAnswer, getClarifyingCard } from './services/geminiService';
+import { supabase, onAuthStateChange, signOut } from './services/supabaseClient';
 import type { AppStep, Spread, DrawnCard, ReadingRecord, Reading, UserProfile, AppView, Deck } from './types';
 import { SPREADS } from './data/spreadsData';
 import { DEFAULT_DECK } from './data/tarotData';
 
 const App: React.FC = () => {
+  // Auth state
+  const [user, setUser] = useState<any>(null);
+  const [authLoading, setAuthLoading] = useState(true);
+
   const [step, setStep] = useState<AppStep>('JOURNAL');
   const [view, setView] = useState<AppView>('APP');
   const [history, setHistory] = useState<ReadingRecord[]>([]);
@@ -46,65 +52,188 @@ const App: React.FC = () => {
   const [cardNotes, setCardNotes] = useState<Record<string, string>>({});
   const [cardResonance, setCardResonance] = useState<Record<string, 'love' | 'neutral' | 'shadow'>>({});
 
+  // Auth listener
   useEffect(() => {
-    try {
-      const savedHistory = localStorage.getItem('tarotHistory');
-      if (savedHistory) setHistory(JSON.parse(savedHistory));
-      
-      const savedProfile = localStorage.getItem('userProfile');
-      if (savedProfile) setUserProfile(JSON.parse(savedProfile));
-      
-      const savedCustomSpreads = localStorage.getItem('customSpreads');
-      if (savedCustomSpreads) setCustomSpreads(JSON.parse(savedCustomSpreads));
-      
-      const savedCardNotes = localStorage.getItem('cardNotes');
-      if (savedCardNotes) setCardNotes(JSON.parse(savedCardNotes));
-      
-      const savedCardResonance = localStorage.getItem('cardResonance');
-      if (savedCardResonance) setCardResonance(JSON.parse(savedCardResonance));
+    const { data: { subscription } } = onAuthStateChange((user) => {
+      setUser(user);
+      setAuthLoading(false);
+    });
 
-    } catch (error) {
-      console.error("Failed to load data from localStorage", error);
-    }
+    return () => subscription.unsubscribe();
   }, []);
 
+  // Load data from Supabase when user logs in
   useEffect(() => {
-    localStorage.setItem('tarotHistory', JSON.stringify(history));
-  }, [history]);
-  
-  useEffect(() => {
-    localStorage.setItem('customSpreads', JSON.stringify(customSpreads));
-  }, [customSpreads]);
-  
-  useEffect(() => {
-    localStorage.setItem('cardNotes', JSON.stringify(cardNotes));
-  }, [cardNotes]);
-  
-  useEffect(() => {
-    localStorage.setItem('cardResonance', JSON.stringify(cardResonance));
-  }, [cardResonance]);
+    if (!user) return;
 
-  const handleProfileSave = (profile: UserProfile) => {
+    const loadUserData = async () => {
+      try {
+        // Load profile
+        const { data: profileData } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', user.id)
+          .single();
+        
+        if (profileData) {
+          setUserProfile({
+            name: profileData.name || '',
+            focusAreas: profileData.focus_areas || [],
+            readingStyle: profileData.reading_style || 'gentle',
+            intentions: profileData.intentions || '',
+          });
+        }
+
+        // Load readings
+        const { data: readingsData } = await supabase
+          .from('readings')
+          .select('*')
+          .eq('user_id', user.id)
+          .order('created_at', { ascending: false });
+        
+        if (readingsData) {
+          const formattedReadings: ReadingRecord[] = readingsData.map((r: any) => ({
+            id: r.id,
+            date: r.created_at,
+            journalEntry: r.journal_entry,
+            spread: { spreadName: r.spread_name } as Spread,
+            deck: currentDeck,
+            drawnCards: r.drawn_cards,
+            reading: r.reading,
+            isTurningPoint: r.is_turning_point,
+          }));
+          setHistory(formattedReadings);
+        }
+
+        // Load card notes
+        const { data: notesData } = await supabase
+          .from('card_notes')
+          .select('*')
+          .eq('user_id', user.id);
+        
+        if (notesData) {
+          const notes: Record<string, string> = {};
+          const resonance: Record<string, 'love' | 'neutral' | 'shadow'> = {};
+          notesData.forEach((n: any) => {
+            if (n.note) notes[n.card_name] = n.note;
+            if (n.resonance) resonance[n.card_name] = n.resonance;
+          });
+          setCardNotes(notes);
+          setCardResonance(resonance);
+        }
+
+        // Load custom spreads
+        const { data: spreadsData } = await supabase
+          .from('custom_spreads')
+          .select('*')
+          .eq('user_id', user.id);
+        
+        if (spreadsData) {
+          const spreads: Spread[] = spreadsData.map((s: any) => ({
+            theme: s.theme,
+            spreadName: s.spread_name,
+            description: s.description,
+            numberOfCards: s.number_of_cards,
+            positions: s.positions,
+            isCustom: true,
+          }));
+          setCustomSpreads(spreads);
+        }
+
+      } catch (err) {
+        console.error('Error loading user data:', err);
+      }
+    };
+
+    loadUserData();
+  }, [user]);
+
+  const handleSignOut = async () => {
+    await signOut();
+    setUser(null);
+    setUserProfile(null);
+    setHistory([]);
+    setCardNotes({});
+    setCardResonance({});
+    setCustomSpreads([]);
+  };
+
+  const handleProfileSave = async (profile: UserProfile) => {
     setUserProfile(profile);
-    localStorage.setItem('userProfile', JSON.stringify(profile));
     setIsProfileOpen(false);
+
+    if (user) {
+      await supabase
+        .from('profiles')
+        .upsert({
+          id: user.id,
+          name: profile.name,
+          focus_areas: profile.focusAreas,
+          reading_style: profile.readingStyle,
+          intentions: profile.intentions,
+          updated_at: new Date().toISOString(),
+        });
+    }
   };
   
-  const handleSaveCardNote = (cardName: string, note: string) => {
+  const handleSaveCardNote = async (cardName: string, note: string) => {
     setCardNotes(prev => ({ ...prev, [cardName]: note }));
+
+    if (user) {
+      await supabase
+        .from('card_notes')
+        .upsert({
+          user_id: user.id,
+          card_name: cardName,
+          note: note,
+          updated_at: new Date().toISOString(),
+        }, { onConflict: 'user_id,card_name' });
+    }
   };
   
-  const handleSetCardResonance = (cardName: string, resonance: 'love' | 'neutral' | 'shadow') => {
+  const handleSetCardResonance = async (cardName: string, resonance: 'love' | 'neutral' | 'shadow') => {
     setCardResonance(prev => ({ ...prev, [cardName]: resonance }));
+
+    if (user) {
+      await supabase
+        .from('card_notes')
+        .upsert({
+          user_id: user.id,
+          card_name: cardName,
+          resonance: resonance,
+          updated_at: new Date().toISOString(),
+        }, { onConflict: 'user_id,card_name' });
+    }
   };
   
-  const handleCreateSpread = (newSpread: Omit<Spread, 'theme' | 'isCustom'>) => {
+  const handleCreateSpread = async (newSpread: Omit<Spread, 'theme' | 'isCustom'>) => {
     const fullSpread: Spread = { ...newSpread, theme: 'Custom', isCustom: true };
     setCustomSpreads(prev => [...prev, fullSpread]);
+
+    if (user) {
+      await supabase
+        .from('custom_spreads')
+        .insert({
+          user_id: user.id,
+          theme: 'Custom',
+          spread_name: newSpread.spreadName,
+          description: newSpread.description,
+          number_of_cards: newSpread.numberOfCards,
+          positions: newSpread.positions,
+        });
+    }
   };
 
-  const handleDeleteSpread = (spreadName: string) => {
+  const handleDeleteSpread = async (spreadName: string) => {
     setCustomSpreads(prev => prev.filter(s => s.spreadName !== spreadName));
+
+    if (user) {
+      await supabase
+        .from('custom_spreads')
+        .delete()
+        .eq('user_id', user.id)
+        .eq('spread_name', spreadName);
+    }
   };
 
   const handleReset = useCallback(() => {
@@ -185,6 +314,19 @@ const App: React.FC = () => {
       };
       setHistory(prevHistory => [newRecord, ...prevHistory]);
 
+      // Save to Supabase
+      if (user) {
+        await supabase
+          .from('readings')
+          .insert({
+            user_id: user.id,
+            journal_entry: journalEntry,
+            spread_name: selectedSpread.spreadName,
+            drawn_cards: cards,
+            reading: fullReading,
+          });
+      }
+
       setStep('READING_COMPLETE');
     } catch (err) {
       setError('Could not generate your reading. Please try again.');
@@ -192,7 +334,7 @@ const App: React.FC = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [journalEntry, selectedSpread, userProfile, currentDeck, history]);
+  }, [journalEntry, selectedSpread, userProfile, currentDeck, history, user]);
 
   const handleFollowUpSubmit = useCallback(async (question: string) => {
     if (!reading || !selectedSpread) return;
@@ -264,6 +406,25 @@ const App: React.FC = () => {
 
   const handleSetDailyTask = useCallback((task: string) => { setDailyTask(task); }, []);
   const handleClearDailyTask = useCallback(() => { setDailyTask(''); }, []);
+
+  // Show loading while checking auth
+  if (authLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[var(--bg-color)]">
+        <div className="text-center">
+          <h1 className="font-serif-brand text-2xl text-[var(--text-primary)] tracking-widest uppercase mb-4">
+            Arcana Echo
+          </h1>
+          <div className="animate-pulse text-[var(--text-secondary)]">Loading...</div>
+        </div>
+      </div>
+    );
+  }
+
+  // Show auth if not logged in
+  if (!user) {
+    return <Auth onAuthSuccess={() => {}} />;
+  }
 
   const renderAppContent = () => {
     if (error) {
@@ -351,7 +512,7 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-transparent text-gray-800 dark:text-gray-100 transition-colors duration-300">
-      <Header onSetView={handleSetView} />
+      <Header onSetView={handleSetView} onSignOut={handleSignOut} userEmail={user?.email} />
       <main className="container mx-auto px-4 py-8 md:py-12">
         <div key={view === 'APP' ? step : view} className="animate-slide-up">
             {renderView()}
