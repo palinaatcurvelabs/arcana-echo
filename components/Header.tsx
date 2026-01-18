@@ -12,7 +12,7 @@ const Header: React.FC<HeaderProps> = ({ onSetView }) => {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <header className="flex justify-between items-center p-4 md:p-6 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 transition-colors duration-300">
+    <header className="flex justify-between items-center p-4 md:p-6 border-b border-gray-200 dark:border-[#1c1c1c] bg-white dark:bg-[#0a0a0a] transition-colors duration-300">
       <button onClick={() => onSetView('APP')}>
         <h1 className="font-serif-brand text-2xl text-gray-900 dark:text-white tracking-widest uppercase">
           Arcana Echo
@@ -21,7 +21,7 @@ const Header: React.FC<HeaderProps> = ({ onSetView }) => {
       <nav className="flex items-center space-x-2 md:space-x-4">
         <button
           onClick={toggleTheme}
-          className="p-2 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors duration-300"
+          className="p-2 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-[#1a1a1a] rounded-full transition-colors duration-300"
           aria-label="Toggle Dark Mode"
           title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
         >
@@ -51,7 +51,7 @@ const Header: React.FC<HeaderProps> = ({ onSetView }) => {
         </button>
          <button
           onClick={() => onSetView('LIVE_CONVERSATION')}
-          className="p-2 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors duration-300"
+          className="p-2 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-[#1a1a1a] rounded-full transition-colors duration-300"
           aria-label="Start live reading"
           title="Live Reading"
         >
@@ -61,7 +61,7 @@ const Header: React.FC<HeaderProps> = ({ onSetView }) => {
         </button>
          <button
           onClick={() => onSetView('PROFILE')}
-          className="p-2 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors duration-300"
+          className="p-2 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-[#1a1a1a] rounded-full transition-colors duration-300"
           aria-label="Open profile"
           title="Profile"
         >

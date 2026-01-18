@@ -221,14 +221,14 @@ const LiveConversation: React.FC = () => {
             <h2 className="font-serif-brand text-3xl text-gray-900 dark:text-gray-100 uppercase tracking-wider mb-4">Live Reading</h2>
 
             {/* Transcript Display */}
-            <div className="w-full flex-grow bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4 mb-6 overflow-y-auto shadow-inner">
+            <div className="w-full flex-grow bg-white dark:bg-[#111111] border border-gray-200 dark:border-[#1c1c1c] rounded-lg p-4 mb-6 overflow-y-auto shadow-inner">
                 {transcript.length === 0 && status !== 'active' && (
                     <p className="text-gray-400 dark:text-gray-500 text-center my-auto">Your conversation will appear here.</p>
                 )}
                 <div className="space-y-4">
                     {transcript.map((entry, index) => (
                         <div key={index} className={`flex ${entry.speaker === 'user' ? 'justify-end' : 'justify-start'}`}>
-                            <p className={`inline-block rounded-lg px-3 py-2 max-w-[80%] ${entry.speaker === 'user' ? 'bg-gray-800 dark:bg-gray-700 text-white' : 'bg-gray-200 dark:bg-gray-600 text-gray-800 dark:text-gray-100'}`}>
+                            <p className={`inline-block rounded-lg px-3 py-2 max-w-[80%] ${entry.speaker === 'user' ? 'bg-neutral-800 dark:bg-[#1a1a1a] text-white' : 'bg-neutral-200 dark:bg-[#2a2a2a] text-neutral-800 dark:text-neutral-100'}`}>
                                 {entry.text}
                             </p>
                         </div>

@@ -22,7 +22,7 @@ const DrawMethodSelection: React.FC<DrawMethodSelectionProps> = ({ onSelect, cur
         {/* Physical Deck Option */}
         <button
           onClick={() => onSelect('physical')}
-          className="p-8 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-left hover:shadow-xl hover:-translate-y-2 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 dark:focus:ring-gray-400"
+          className="p-8 bg-white dark:bg-[#111111] border border-gray-200 dark:border-[#1c1c1c] rounded-lg text-left hover:shadow-xl hover:-translate-y-2 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 dark:focus:ring-gray-400"
         >
           <div className="flex justify-between items-start">
             <h3 className="font-serif-display text-2xl text-gray-900 dark:text-gray-100">Use My Own Deck</h3>
@@ -33,7 +33,7 @@ const DrawMethodSelection: React.FC<DrawMethodSelectionProps> = ({ onSelect, cur
         {/* Digital Draw Option */}
         <button
           onClick={() => onSelect('digital')}
-          className="p-8 bg-gray-900 dark:bg-gray-700 text-white border border-gray-700 dark:border-gray-600 rounded-lg text-left hover:shadow-xl hover:-translate-y-2 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white dark:focus:ring-gray-500"
+          className="p-8 bg-gray-900 dark:bg-[#181818] text-white border border-gray-700 dark:border-[#252525] rounded-lg text-left hover:shadow-xl hover:-translate-y-2 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white dark:focus:ring-gray-500"
         >
           <h3 className="font-serif-display text-2xl">Draw Cards Digitally</h3>
           <p className="text-gray-300 mt-3">Let the digital ether shuffle and present your cards. Perfect for quick readings or when you don't have your deck handy.</p>

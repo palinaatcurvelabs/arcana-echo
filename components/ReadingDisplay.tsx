@@ -219,7 +219,7 @@ ${retool}
                 <div 
                 key={index} 
                 ref={el => cardRefs.current[index] = el}
-                className="bg-white dark:bg-gray-800 border-l-2 border-gray-800 dark:border-gray-300 pl-4 py-4 pr-2 rounded-r-lg shadow-sm flex flex-col md:flex-row gap-4"
+                className="bg-white dark:bg-[#111111] border-l-2 border-gray-800 dark:border-gray-300 pl-4 py-4 pr-2 rounded-r-lg shadow-sm flex flex-col md:flex-row gap-4"
                 >
                 {cardImage && (
                     <div className="w-full md:w-1/3 flex-shrink-0">
@@ -238,7 +238,7 @@ ${retool}
                     <p className="text-gray-600 dark:text-gray-300 mt-2">{card.contextualMeaning}</p>
                     
                     {card.clarification ? (
-                        <div className="mt-4 pl-4 border-l-2 border-gray-200 dark:border-gray-700">
+                        <div className="mt-4 pl-4 border-l-2 border-gray-200 dark:border-[#1c1c1c]">
                             <p className="text-sm text-gray-700 dark:text-gray-200 font-semibold">Clarification: {card.clarification.cardName}</p>
                             <p className="text-gray-500 dark:text-gray-400 mt-1 text-sm">{card.clarification.meaning}</p>
                         </div>
@@ -288,7 +288,7 @@ ${retool}
              if (!tarotCardData) return null;
 
              return (
-                <div key={`${index}-symbolism`} className="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg border border-gray-200 dark:border-gray-700">
+                <div key={`${index}-symbolism`} className="bg-gray-50 dark:bg-[#0a0a0a] p-4 rounded-lg border border-gray-200 dark:border-[#1c1c1c]">
                     <h3 className="font-serif-display text-xl text-gray-900 dark:text-gray-100">
                         {tarotCardData.name}
                         {card.orientation === 'reversed' && <span className="text-sm font-normal text-gray-500 dark:text-gray-400 ml-2">(Reversed)</span>}
@@ -311,7 +311,7 @@ ${retool}
             <button
                 onClick={handlePlayReading}
                 disabled={audioState === 'loading'}
-                className="p-2 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 disabled:cursor-wait transition-colors"
+                className="p-2 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200 rounded-full hover:bg-gray-100 dark:hover:bg-[#1a1a1a] disabled:cursor-wait transition-colors"
                 title={audioState === 'playing' ? 'Stop Reading' : 'Play Reading'}
             >
                 {renderPlayButtonIcon()}
@@ -360,7 +360,7 @@ ${retool}
           </button>
           <button
             onClick={handleCopyToClipboard}
-            className="px-6 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-300 w-full sm:w-auto"
+            className="px-6 py-2 border border-gray-300 dark:border-[#252525] text-gray-700 dark:text-gray-300 font-medium rounded-lg hover:bg-gray-100 dark:hover:bg-[#1a1a1a] transition-colors duration-300 w-full sm:w-auto"
           >
             {isCopied ? 'Copied!' : 'Copy Reading'}
           </button>
@@ -380,10 +380,10 @@ ${retool}
             {reading.conversation.map((entry, index) => (
               <React.Fragment key={index}>
                 <div className="flex justify-end">
-                  <p className="inline-block bg-gray-800 dark:bg-gray-700 text-white rounded-lg px-3 py-2">{entry.question}</p>
+                  <p className="inline-block bg-neutral-800 dark:bg-[#1a1a1a] text-white rounded-lg px-3 py-2">{entry.question}</p>
                 </div>
                  <div className="flex justify-start">
-                  <p className="inline-block bg-gray-200 dark:bg-gray-800 rounded-lg px-3 py-2 text-gray-800 dark:text-gray-200">{entry.answer}</p>
+                  <p className="inline-block bg-gray-200 dark:bg-[#111111] rounded-lg px-3 py-2 text-gray-800 dark:text-gray-200">{entry.answer}</p>
                 </div>
               </React.Fragment>
             ))}
@@ -396,14 +396,14 @@ ${retool}
               value={followUpQuestion}
               onChange={(e) => setFollowUpQuestion(e.target.value)}
               placeholder="Ask a question about your reading..."
-              className="w-full h-24 p-4 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500 focus:border-transparent focus:outline-none transition-shadow duration-300 resize-none placeholder-gray-400 dark:placeholder-gray-500"
+              className="w-full h-24 p-4 bg-white dark:bg-[#111111] border border-gray-300 dark:border-[#1c1c1c] rounded-lg text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500 focus:border-transparent focus:outline-none transition-shadow duration-300 resize-none placeholder-gray-400 dark:placeholder-gray-500"
               disabled={isFollowUpLoading}
           />
           <div className="text-center mt-4">
              <button
                 type="submit"
                 disabled={!followUpQuestion.trim() || isFollowUpLoading}
-                className="px-8 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 disabled:bg-gray-100 dark:disabled:bg-gray-800 disabled:cursor-not-allowed disabled:text-gray-400 dark:disabled:text-gray-600 transition-colors duration-300"
+                className="px-8 py-3 border border-gray-300 dark:border-[#252525] text-gray-700 dark:text-gray-300 font-medium rounded-lg hover:bg-gray-100 dark:hover:bg-[#1a1a1a] disabled:bg-gray-100 dark:disabled:bg-gray-800 disabled:cursor-not-allowed disabled:text-gray-400 dark:disabled:text-gray-600 transition-colors duration-300"
               >
                 {isFollowUpLoading ? 'Thinking...' : 'Ask'}
               </button>

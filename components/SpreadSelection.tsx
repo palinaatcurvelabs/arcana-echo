@@ -18,7 +18,7 @@ const SpreadSelection: React.FC<SpreadSelectionProps> = ({ spreads, onSelect }) 
         {spreads.map((spread, index) => (
           <div
             key={index}
-            className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-6 rounded-lg flex flex-col text-left hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+            className="bg-white dark:bg-[#111111] border border-gray-200 dark:border-[#1c1c1c] p-6 rounded-lg flex flex-col text-left hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer"
             onClick={() => onSelect(spread)}
             role="button"
             tabIndex={0}

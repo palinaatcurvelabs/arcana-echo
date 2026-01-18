@@ -55,7 +55,7 @@ const Profile: React.FC<ProfileProps> = ({ userProfile, onSave, onClose }) => {
   return (
     <div className="modal-overlay animate-fade-in" onClick={onClose}>
       <div 
-        className="w-full max-w-lg mx-4 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-6 md:p-8 border border-gray-200 dark:border-gray-700 max-h-[90vh] overflow-y-auto"
+        className="w-full max-w-lg mx-4 bg-white dark:bg-[#111111] rounded-2xl shadow-2xl p-6 md:p-8 border border-gray-200 dark:border-[#1c1c1c] max-h-[90vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="text-center mb-8">
@@ -78,7 +78,7 @@ const Profile: React.FC<ProfileProps> = ({ userProfile, onSave, onClose }) => {
               value={profileData.name}
               onChange={(e) => setProfileData({ ...profileData, name: e.target.value })}
               placeholder="Your name or nickname"
-              className="w-full p-3 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-xl text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-gray-400 focus:outline-none transition-all"
+              className="w-full p-3 bg-white dark:bg-[#181818] border border-gray-300 dark:border-[#252525] rounded-xl text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-gray-400 focus:outline-none transition-all"
             />
           </div>
 
@@ -96,7 +96,7 @@ const Profile: React.FC<ProfileProps> = ({ userProfile, onSave, onClose }) => {
                   className={`p-3 rounded-xl border text-left transition-all duration-200 ${
                     profileData.focusAreas.includes(area.id)
                       ? 'border-gray-900 dark:border-gray-100 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900'
-                      : 'border-gray-200 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-400 text-gray-700 dark:text-gray-300'
+                      : 'border-gray-200 dark:border-[#252525] hover:border-gray-400 dark:hover:border-gray-400 text-gray-700 dark:text-gray-300'
                   }`}
                 >
                   <span className="mr-2">{area.icon}</span>
@@ -119,8 +119,8 @@ const Profile: React.FC<ProfileProps> = ({ userProfile, onSave, onClose }) => {
                   onClick={() => setProfileData({ ...profileData, readingStyle: style.id as UserProfile['readingStyle'] })}
                   className={`w-full p-4 rounded-xl border text-left transition-all duration-200 ${
                     profileData.readingStyle === style.id
-                      ? 'border-gray-900 dark:border-gray-100 bg-gray-50 dark:bg-gray-700'
-                      : 'border-gray-200 dark:border-gray-600 hover:border-gray-400'
+                      ? 'border-gray-900 dark:border-gray-100 bg-gray-50 dark:bg-[#181818]'
+                      : 'border-gray-200 dark:border-[#252525] hover:border-gray-400'
                   }`}
                 >
                   <div className="flex items-center justify-between">
@@ -145,7 +145,7 @@ const Profile: React.FC<ProfileProps> = ({ userProfile, onSave, onClose }) => {
               onChange={(e) => setProfileData({ ...profileData, intentions: e.target.value })}
               placeholder="Share what's on your mind, what you're navigating, or what you're hoping to understand better..."
               rows={4}
-              className="w-full p-3 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-xl text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-gray-400 focus:outline-none transition-all resize-none placeholder-gray-400 dark:placeholder-gray-500"
+              className="w-full p-3 bg-white dark:bg-[#181818] border border-gray-300 dark:border-[#252525] rounded-xl text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-gray-400 focus:outline-none transition-all resize-none placeholder-gray-400 dark:placeholder-gray-500"
             />
             <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
               This helps Arcana give you more relevant guidance
@@ -157,7 +157,7 @@ const Profile: React.FC<ProfileProps> = ({ userProfile, onSave, onClose }) => {
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 px-6 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-all"
+              className="flex-1 px-6 py-3 border border-gray-300 dark:border-[#252525] text-gray-700 dark:text-gray-300 font-medium rounded-xl hover:bg-gray-50 dark:hover:bg-[#222222] transition-all"
             >
               Cancel
             </button>

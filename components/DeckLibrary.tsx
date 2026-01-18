@@ -38,7 +38,7 @@ const DeckLibrary: React.FC<DeckLibraryProps> = ({ decks, currentDeck, onSelectD
             {decks.map(deck => (
                 <div 
                     key={deck.id}
-                    className={`relative p-0 rounded-lg border overflow-hidden transition-all duration-300 cursor-pointer hover:shadow-lg hover:-translate-y-1 flex flex-col ${currentDeck.id === deck.id ? 'bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 border-transparent shadow-xl' : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100'}`}
+                    className={`relative p-0 rounded-lg border overflow-hidden transition-all duration-300 cursor-pointer hover:shadow-lg hover:-translate-y-1 flex flex-col ${currentDeck.id === deck.id ? 'bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 border-transparent shadow-xl' : 'bg-white dark:bg-[#111111] border-gray-200 dark:border-[#1c1c1c] text-gray-900 dark:text-gray-100'}`}
                     onClick={() => onSelectDeck(deck)}
                 >
                      {/* Simulating a cover visual if none exists, using specific CSS for Echo Deck */}
@@ -51,7 +51,7 @@ const DeckLibrary: React.FC<DeckLibraryProps> = ({ decks, currentDeck, onSelectD
                          ) : deck.coverImage ? (
                              <img src={deck.coverImage} alt={`${deck.name} cover`} className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity" />
                          ) : (
-                             <div className="w-full h-full flex items-center justify-center bg-gray-100 dark:bg-gray-800">
+                             <div className="w-full h-full flex items-center justify-center bg-gray-100 dark:bg-[#111111]">
                                  <span className="text-4xl">🎴</span>
                              </div>
                          )}
@@ -79,7 +79,7 @@ const DeckLibrary: React.FC<DeckLibraryProps> = ({ decks, currentDeck, onSelectD
                             )}
                             <button
                                 onClick={(e) => handlePreview(e, deck)}
-                                className={`text-xs font-bold uppercase tracking-wider px-3 py-1 rounded border ${currentDeck.id === deck.id ? 'border-gray-800 dark:border-gray-200 hover:bg-gray-800 hover:text-white dark:hover:bg-gray-200 dark:hover:text-gray-900' : 'border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700'}`}
+                                className={`text-xs font-bold uppercase tracking-wider px-3 py-1 rounded border ${currentDeck.id === deck.id ? 'border-gray-800 dark:border-gray-200 hover:bg-gray-800 hover:text-white dark:hover:bg-gray-200 dark:hover:text-gray-900' : 'border-gray-300 dark:border-[#252525] hover:bg-gray-100 dark:hover:bg-[#222222]'}`}
                             >
                                 Inspect Deck
                             </button>
@@ -93,10 +93,10 @@ const DeckLibrary: React.FC<DeckLibraryProps> = ({ decks, currentDeck, onSelectD
        {previewDeck && (
            <div className="modal-overlay animate-fade-in" onClick={closePreview}>
                <div 
-                 className="w-full max-w-6xl h-[90vh] bg-white dark:bg-gray-900 rounded-lg shadow-2xl flex flex-col overflow-hidden m-4"
+                 className="w-full max-w-6xl h-[90vh] bg-white dark:bg-[#0a0a0a] rounded-lg shadow-2xl flex flex-col overflow-hidden m-4"
                  onClick={(e) => e.stopPropagation()}
                >
-                   <div className="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center bg-white dark:bg-gray-900 z-10">
+                   <div className="p-4 border-b border-gray-200 dark:border-[#1c1c1c] flex justify-between items-center bg-white dark:bg-[#0a0a0a] z-10">
                        <h3 className="font-serif-brand text-2xl text-gray-900 dark:text-gray-100 uppercase tracking-wider">
                            {previewDeck.name} <span className="text-gray-500 text-sm normal-case align-middle ml-2">({previewDeck.theme})</span>
                        </h3>
@@ -107,7 +107,7 @@ const DeckLibrary: React.FC<DeckLibraryProps> = ({ decks, currentDeck, onSelectD
                        </button>
                    </div>
                    
-                   <div className="flex-grow overflow-y-auto p-6 bg-gray-50 dark:bg-gray-950">
+                   <div className="flex-grow overflow-y-auto p-6 bg-gray-50 dark:bg-[#050505]">
                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
                            {TAROT_CARDS.map(card => (
                                <div key={card.name} className="flex flex-col items-center">

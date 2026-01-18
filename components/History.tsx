@@ -69,10 +69,10 @@ ${retool}
       
       <div className="space-y-4">
         {history.map((record) => (
-          <div key={record.id} className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden transition-all duration-300 shadow-sm hover:shadow-md">
+          <div key={record.id} className="bg-white dark:bg-[#111111] border border-gray-200 dark:border-[#1c1c1c] rounded-xl overflow-hidden transition-all duration-300 shadow-sm hover:shadow-md">
             <button
               onClick={() => toggleExpansion(record.id)}
-              className="w-full text-left p-4 md:p-6 flex justify-between items-center hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors duration-200"
+              className="w-full text-left p-4 md:p-6 flex justify-between items-center hover:bg-gray-50 dark:hover:bg-[#222222]/50 transition-colors duration-200"
               aria-expanded={expandedId === record.id}
               aria-controls={`reading-${record.id}`}
             >
@@ -107,13 +107,13 @@ ${retool}
               id={`reading-${record.id}`} 
               className={`transition-all duration-500 ease-in-out overflow-hidden ${expandedId === record.id ? 'max-h-[2000px]' : 'max-h-0'}`}
             >
-              <div className="max-h-[75vh] overflow-y-auto p-4 md:p-6 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50">
+              <div className="max-h-[75vh] overflow-y-auto p-4 md:p-6 border-t border-gray-200 dark:border-[#1c1c1c] bg-gray-50 dark:bg-[#0a0a0a]/50">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                   <div>
                     {record.journalEntry && (
                       <>
                         <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">Your Question</h4>
-                        <blockquote className="text-gray-700 dark:text-gray-300 italic border-l-2 border-gray-300 dark:border-gray-600 pl-4 mb-6">
+                        <blockquote className="text-gray-700 dark:text-gray-300 italic border-l-2 border-gray-300 dark:border-[#252525] pl-4 mb-6">
                           "{record.journalEntry}"
                         </blockquote>
                       </>
@@ -122,7 +122,7 @@ ${retool}
                     <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">Cards Drawn</h4>
                     <div className="space-y-2 mb-6">
                       {record.drawnCards.map(c => (
-                        <div key={c.position} className="flex items-center gap-3 p-3 bg-white dark:bg-gray-800 rounded-lg border border-gray-100 dark:border-gray-700">
+                        <div key={c.position} className="flex items-center gap-3 p-3 bg-white dark:bg-[#111111] rounded-lg border border-gray-100 dark:border-[#1c1c1c]">
                           <div className="w-8 h-12 rounded bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-600 flex items-center justify-center text-xs">
                             ✦
                           </div>
@@ -143,7 +143,7 @@ ${retool}
                       {record.reading.interpretation.split('\n').filter(p => p).map((p, i) => <p key={i}>{p}</p>)}
                     </div>
                     
-                    <div className="mt-6 p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+                    <div className="mt-6 p-4 bg-white dark:bg-[#111111] rounded-lg border border-gray-200 dark:border-[#1c1c1c]">
                       <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">Daily Focus</h4>
                       <p className="text-gray-700 dark:text-gray-300">{record.reading.retool}</p>
                     </div>
@@ -164,7 +164,7 @@ ${retool}
                     
                     <button
                       onClick={() => handleHistoryCopy(record)}
-                      className="mt-6 px-4 py-2 text-sm border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-300"
+                      className="mt-6 px-4 py-2 text-sm border border-gray-300 dark:border-[#252525] text-gray-700 dark:text-gray-300 font-medium rounded-lg hover:bg-gray-100 dark:hover:bg-[#222222] transition-colors duration-300"
                     >
                       Copy Reading
                     </button>

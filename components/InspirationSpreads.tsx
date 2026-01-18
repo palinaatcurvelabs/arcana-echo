@@ -8,7 +8,7 @@ interface InspirationSpreadsProps {
 
 const InspirationSpreads: React.FC<InspirationSpreadsProps> = ({ spreads, onSelect }) => {
   return (
-    <div className="w-full max-w-4xl mx-auto p-4 md:p-8 mt-8 text-center border-t border-gray-200 dark:border-gray-700">
+    <div className="w-full max-w-4xl mx-auto p-4 md:p-8 mt-8 text-center border-t border-gray-200 dark:border-[#1c1c1c]">
       <h3 className="font-serif-brand text-2xl text-gray-900 dark:text-gray-100 uppercase tracking-wider mb-2">
         Or Seek Inspiration
       </h3>
@@ -18,7 +18,7 @@ const InspirationSpreads: React.FC<InspirationSpreadsProps> = ({ spreads, onSele
         {spreads.map((spread, index) => (
           <div
             key={index}
-            className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-6 rounded-lg flex flex-col text-left hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+            className="bg-white dark:bg-[#111111] border border-gray-200 dark:border-[#1c1c1c] p-6 rounded-lg flex flex-col text-left hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer"
             onClick={() => onSelect(spread)}
             role="button"
             tabIndex={0}

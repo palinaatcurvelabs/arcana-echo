@@ -52,23 +52,23 @@ const SpreadLab: React.FC<{ onSave: SpreadLibraryProps['onCreateSpread'], onCanc
     };
 
     return (
-        <div className="mt-8 p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-md animate-fade-in">
+        <div className="mt-8 p-6 bg-white dark:bg-[#111111] border border-gray-200 dark:border-[#1c1c1c] rounded-lg shadow-md animate-fade-in">
             <h3 className="font-serif-brand text-2xl text-gray-900 dark:text-gray-100 uppercase tracking-wider mb-4 text-center">Create a Custom Spread</h3>
             <form onSubmit={handleSubmit} className="space-y-4">
-                <input type="text" value={spreadName} onChange={e => setSpreadName(e.target.value)} placeholder="Spread Name" className="w-full p-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 rounded-md" required />
-                <textarea value={description} onChange={e => setDescription(e.target.value)} placeholder="Description" className="w-full p-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 rounded-md" required />
+                <input type="text" value={spreadName} onChange={e => setSpreadName(e.target.value)} placeholder="Spread Name" className="w-full p-2 border border-gray-300 dark:border-[#252525] dark:bg-[#181818] dark:text-gray-100 rounded-md" required />
+                <textarea value={description} onChange={e => setDescription(e.target.value)} placeholder="Description" className="w-full p-2 border border-gray-300 dark:border-[#252525] dark:bg-[#181818] dark:text-gray-100 rounded-md" required />
                 <div>
                     <label className="font-semibold text-gray-700 dark:text-gray-300">Card Positions</label>
                     {positions.map((pos, index) => (
                         <div key={index} className="flex items-center gap-2 mt-2">
-                            <input type="text" value={pos} onChange={e => handlePositionChange(index, e.target.value)} placeholder={`Position ${index + 1}`} className="w-full p-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 rounded-md" required />
+                            <input type="text" value={pos} onChange={e => handlePositionChange(index, e.target.value)} placeholder={`Position ${index + 1}`} className="w-full p-2 border border-gray-300 dark:border-[#252525] dark:bg-[#181818] dark:text-gray-100 rounded-md" required />
                             <button type="button" onClick={() => removePosition(index)} className="p-2 text-red-500 hover:bg-red-100 dark:hover:bg-red-900/50 rounded-full" disabled={positions.length <= 1}>&times;</button>
                         </div>
                     ))}
                     <button type="button" onClick={addPosition} className="mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline">+ Add Position</button>
                 </div>
                  <div className="flex justify-center gap-4 pt-4">
-                    <button type="button" onClick={onCancel} className="px-6 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">Cancel</button>
+                    <button type="button" onClick={onCancel} className="px-6 py-2 border border-gray-300 dark:border-[#252525] text-gray-700 dark:text-gray-300 font-medium rounded-lg hover:bg-gray-100 dark:hover:bg-[#222222]">Cancel</button>
                     <button type="submit" className="px-6 py-2 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 font-medium rounded-lg hover:bg-gray-700 dark:hover:bg-gray-300">Save Spread</button>
                 </div>
             </form>
@@ -99,10 +99,10 @@ const SpreadLibrary: React.FC<SpreadLibraryProps> = ({ allSpreads, onSelectSprea
              <div className="space-y-12 mt-8">
                 {themeOrder.map(theme => (
                     <section key={theme}>
-                        <h3 className="font-serif-display text-2xl text-gray-800 dark:text-gray-200 border-b border-gray-200 dark:border-gray-700 pb-2 mb-6">{theme}</h3>
+                        <h3 className="font-serif-display text-2xl text-gray-800 dark:text-gray-200 border-b border-gray-200 dark:border-[#1c1c1c] pb-2 mb-6">{theme}</h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {groupedSpreads[theme].map((spread) => (
-                                <div key={spread.spreadName} className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-6 rounded-lg flex flex-col text-left hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
+                                <div key={spread.spreadName} className="bg-white dark:bg-[#111111] border border-gray-200 dark:border-[#1c1c1c] p-6 rounded-lg flex flex-col text-left hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
                                     <div className="flex-grow cursor-pointer" onClick={() => onSelectSpread(spread)}>
                                         <h4 className="text-xl font-serif-display text-gray-900 dark:text-gray-100">{spread.spreadName}</h4>
                                         <p className="text-gray-500 dark:text-gray-400 mt-3 text-sm flex-grow">{spread.description}</p>

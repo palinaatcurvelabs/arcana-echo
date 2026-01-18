@@ -90,14 +90,14 @@ const CardInput: React.FC<CardInputProps> = ({ spread, onSubmit, isLoading, curr
   };
 
   const getInputClass = (status: 'valid' | 'invalid' | 'idle') => {
-    let baseClass = "w-full p-3 pr-10 bg-white dark:bg-gray-800 border rounded-lg text-gray-800 dark:text-gray-100 focus:outline-none transition-all duration-300";
+    let baseClass = "w-full p-3 pr-10 bg-white dark:bg-[#111111] border rounded-lg text-gray-800 dark:text-gray-100 focus:outline-none transition-all duration-300";
     switch (status) {
         case 'valid':
             return `${baseClass} border-green-500 focus:ring-2 focus:ring-green-300`;
         case 'invalid':
             return `${baseClass} border-red-500 focus:ring-2 focus:ring-red-300`;
         default:
-            return `${baseClass} border-gray-300 dark:border-gray-700 focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500`;
+            return `${baseClass} border-gray-300 dark:border-[#1c1c1c] focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500`;
     }
   };
 
@@ -154,13 +154,13 @@ const CardInput: React.FC<CardInputProps> = ({ spread, onSubmit, isLoading, curr
                 {validationStatus[index] === 'invalid' && (drawnCards[index]?.cardName.length ?? 0) > 0 && <ErrorIcon />}
             </div>
             {activeInput === index && suggestions.length > 0 && (
-              <ul className="absolute z-10 w-full mt-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md shadow-lg max-h-60 overflow-auto animate-fade-in" style={{animationDuration: '0.2s'}}>
+              <ul className="absolute z-10 w-full mt-1 bg-white dark:bg-[#111111] border border-gray-200 dark:border-[#1c1c1c] rounded-md shadow-lg max-h-60 overflow-auto animate-fade-in" style={{animationDuration: '0.2s'}}>
                 {suggestions.map((suggestion) => (
                   <li
                     key={suggestion}
                     // Use onMouseDown to prevent the input's onBlur from firing before the click is registered
                     onMouseDown={() => handleSuggestionClick(index, suggestion)}
-                    className="p-3 text-gray-700 dark:text-gray-200 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-150"
+                    className="p-3 text-gray-700 dark:text-gray-200 cursor-pointer hover:bg-gray-100 dark:hover:bg-[#222222] transition-colors duration-150"
                   >
                     {renderSuggestion(suggestion, drawnCards[index]?.cardName)}
                   </li>
@@ -176,7 +176,7 @@ const CardInput: React.FC<CardInputProps> = ({ spread, onSubmit, isLoading, curr
                   id={`reversed-${index}`}
                   checked={drawnCards[index]?.orientation === 'reversed'}
                   onChange={(e) => handleOrientationChange(index, e.target.checked)}
-                  className="h-4 w-4 text-gray-800 dark:text-gray-200 border-gray-300 dark:border-gray-600 rounded focus:ring-gray-500 cursor-pointer"
+                  className="h-4 w-4 text-gray-800 dark:text-gray-200 border-gray-300 dark:border-[#252525] rounded focus:ring-gray-500 cursor-pointer"
                 />
               </div>
           </div>

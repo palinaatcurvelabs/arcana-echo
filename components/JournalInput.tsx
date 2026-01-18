@@ -26,7 +26,7 @@ const JournalInput: React.FC<JournalInputProps> = ({ onSubmit, isLoading }) => {
           value={entry}
           onChange={(e) => setEntry(e.target.value)}
           placeholder="Let your thoughts flow freely. What's on your mind? What energies are surrounding you today?"
-          className="w-full h-48 p-4 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500 focus:border-transparent focus:outline-none transition-all duration-300 resize-none placeholder-gray-400 dark:placeholder-gray-500"
+          className="w-full h-48 p-4 bg-white dark:bg-[#111111] border border-gray-300 dark:border-[#1c1c1c] rounded-lg text-gray-800 dark:text-gray-100 focus:ring-2 focus:ring-gray-400 dark:focus:ring-gray-500 focus:border-transparent focus:outline-none transition-all duration-300 resize-none placeholder-gray-400 dark:placeholder-gray-500"
           disabled={isLoading}
         />
         <div className="text-center mt-6">

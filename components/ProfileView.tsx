@@ -125,25 +125,25 @@ const ProfileView: React.FC<ProfileViewProps> = ({ userProfile, history, onOpenP
 
       {/* Stats Grid */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-200 dark:border-gray-700 text-center">
+        <div className="bg-white dark:bg-[#111111] rounded-xl p-4 border border-gray-200 dark:border-[#1c1c1c] text-center">
           <div className="text-3xl font-serif-display text-gray-900 dark:text-gray-100">
             {insights.totalReadings}
           </div>
           <div className="text-sm text-gray-500 dark:text-gray-400 mt-1">Readings</div>
         </div>
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-200 dark:border-gray-700 text-center">
+        <div className="bg-white dark:bg-[#111111] rounded-xl p-4 border border-gray-200 dark:border-[#1c1c1c] text-center">
           <div className="text-3xl font-serif-display text-gray-900 dark:text-gray-100">
             {Object.keys(insights.mostFrequentCards.reduce((acc, c) => ({ ...acc, [c.cardName]: true }), {})).length || 0}
           </div>
           <div className="text-sm text-gray-500 dark:text-gray-400 mt-1">Unique Cards</div>
         </div>
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-200 dark:border-gray-700 text-center">
+        <div className="bg-white dark:bg-[#111111] rounded-xl p-4 border border-gray-200 dark:border-[#1c1c1c] text-center">
           <div className="text-3xl font-serif-display text-gray-900 dark:text-gray-100">
             {Math.round(insights.majorArcanaRatio)}%
           </div>
           <div className="text-sm text-gray-500 dark:text-gray-400 mt-1">Major Arcana</div>
         </div>
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-200 dark:border-gray-700 text-center">
+        <div className="bg-white dark:bg-[#111111] rounded-xl p-4 border border-gray-200 dark:border-[#1c1c1c] text-center">
           <div className="text-3xl font-serif-display text-gray-900 dark:text-gray-100">
             {history.filter(r => r.isTurningPoint).length}
           </div>
@@ -154,7 +154,7 @@ const ProfileView: React.FC<ProfileViewProps> = ({ userProfile, history, onOpenP
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Focus Areas */}
         {userProfile.focusAreas.length > 0 && (
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+          <div className="bg-white dark:bg-[#111111] rounded-xl p-6 border border-gray-200 dark:border-[#1c1c1c]">
             <h3 className="font-serif-brand text-sm uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-4">
               Your Focus Areas
             </h3>
@@ -162,7 +162,7 @@ const ProfileView: React.FC<ProfileViewProps> = ({ userProfile, history, onOpenP
               {userProfile.focusAreas.map(area => (
                 <span 
                   key={area}
-                  className="px-3 py-1.5 bg-gray-100 dark:bg-gray-700 rounded-full text-sm text-gray-700 dark:text-gray-300"
+                  className="px-3 py-1.5 bg-gray-100 dark:bg-[#181818] rounded-full text-sm text-gray-700 dark:text-gray-300"
                 >
                   {FOCUS_AREA_LABELS[area] || area}
                 </span>
@@ -173,7 +173,7 @@ const ProfileView: React.FC<ProfileViewProps> = ({ userProfile, history, onOpenP
 
         {/* Current Intentions */}
         {userProfile.intentions && (
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+          <div className="bg-white dark:bg-[#111111] rounded-xl p-6 border border-gray-200 dark:border-[#1c1c1c]">
             <h3 className="font-serif-brand text-sm uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-4">
               Current Intentions
             </h3>
@@ -185,7 +185,7 @@ const ProfileView: React.FC<ProfileViewProps> = ({ userProfile, history, onOpenP
 
         {/* Most Frequent Cards */}
         {insights.mostFrequentCards.length > 0 && (
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+          <div className="bg-white dark:bg-[#111111] rounded-xl p-6 border border-gray-200 dark:border-[#1c1c1c]">
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-serif-brand text-sm uppercase tracking-wider text-gray-500 dark:text-gray-400">
                 Cards That Find You
@@ -201,7 +201,7 @@ const ProfileView: React.FC<ProfileViewProps> = ({ userProfile, history, onOpenP
               {insights.mostFrequentCards.slice(0, 5).map((card, index) => (
                 <div key={card.cardName} className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <span className="w-6 h-6 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center text-xs text-gray-500 dark:text-gray-400">
+                    <span className="w-6 h-6 rounded-full bg-gray-100 dark:bg-[#181818] flex items-center justify-center text-xs text-gray-500 dark:text-gray-400">
                       {index + 1}
                     </span>
                     <span className="text-gray-900 dark:text-gray-100 text-sm">{card.cardName}</span>
@@ -214,12 +214,12 @@ const ProfileView: React.FC<ProfileViewProps> = ({ userProfile, history, onOpenP
         )}
 
         {/* Reading Style */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+        <div className="bg-white dark:bg-[#111111] rounded-xl p-6 border border-gray-200 dark:border-[#1c1c1c]">
           <h3 className="font-serif-brand text-sm uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-4">
             Your Reading Style
           </h3>
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
+            <div className="w-12 h-12 rounded-full bg-gray-100 dark:bg-[#181818] flex items-center justify-center">
               {userProfile.readingStyle === 'direct' && '⚡'}
               {userProfile.readingStyle === 'gentle' && '🌙'}
               {userProfile.readingStyle === 'poetic' && '✨'}
@@ -240,7 +240,7 @@ const ProfileView: React.FC<ProfileViewProps> = ({ userProfile, history, onOpenP
 
       {/* Empty State */}
       {insights.totalReadings === 0 && (
-        <div className="text-center py-12 mt-6 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-dashed border-gray-200 dark:border-gray-700">
+        <div className="text-center py-12 mt-6 bg-gray-50 dark:bg-[#111111]/50 rounded-xl border border-dashed border-gray-200 dark:border-[#1c1c1c]">
           <p className="text-gray-500 dark:text-gray-400 mb-2">No readings yet</p>
           <p className="text-sm text-gray-400 dark:text-gray-500">
             Your personal patterns will appear here as you explore the cards
