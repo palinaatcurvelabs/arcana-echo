@@ -1,0 +1,7 @@
+{
+  "name": "Arcana Echo",
+  "description": "An AI-powered daily tarot journaling app that analyzes your feelings to suggest and interpret personalized tarot readings, helping you gain insight and guidance.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
